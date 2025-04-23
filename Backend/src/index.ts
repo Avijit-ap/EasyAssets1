@@ -18,9 +18,11 @@ import cors from "cors";
 
 const corsOptions = {
   origin: process.env.CORS_ORIGIN, // http://localhost:3000 for development and http://easyassets.vercel.app for production
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  methods: ["GET", "POST", "PUT", "DELETE","OPTIONS"],
   credentials: true,
 };
+
+console.log(process.env.CORS_ORIGIN)
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -36,6 +38,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors(corsOptions)); // Enable CORS with the specified options
+app.use((req, res, next) => {
+  console.log(`[${req.method}] ${req.path} - Origin: ${req.headers.origin}`);
+  next();
+});
 
 //For API Docs using Swagger UI
 setupSwagger(app);

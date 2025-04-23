@@ -15,9 +15,12 @@ export const login = async (
       {
         email,
         password,
+      },
+      {
+        withCredentials: true,
       }
     );
-
+    
     return response.data; // Return the login response data
   } catch (error) {
     console.error("Login error:", error);

@@ -30,7 +30,7 @@ const LoginForm = () => {
     try {
       const response = await login(email, password);
       console.log("Login successful", response);
-      navigate("/user-landing");
+      navigate("/dashboard");
     } catch (err) {
       const error = err as AxiosError<{ message: string }>;
       const backendMessage =
